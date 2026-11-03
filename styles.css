@@ -1,0 +1,52 @@
+/* Vault Locker folder picker: rounded, clickable folder boxes that reverse colors when selected. */
+.vault-locker-picker .vl-note {
+	color: var(--text-muted);
+	margin-top: 0;
+}
+.vault-locker-picker .vl-list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+.vault-locker-picker .vl-folder {
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	padding: 10px 14px;
+	cursor: pointer;
+	user-select: none;
+	color: var(--text-normal);
+	background: var(--background-primary);
+}
+.vault-locker-picker .vl-folder:hover {
+	border-color: var(--interactive-accent);
+}
+.vault-locker-picker .vl-folder.is-selected {
+	background: var(--text-normal);
+	color: var(--background-primary);
+	border-color: var(--text-normal);
+}
+.vault-locker-picker .vl-entire {
+	font-style: italic;
+}
+
+/* Password prompt: on phones, sit at the top of the screen so the keyboard can't cover OK. */
+.is-phone .vault-locker-prompt {
+	align-self: flex-start;
+	margin-top: calc(env(safe-area-inset-top) + 12px);
+	max-height: 55vh;
+	overflow-y: auto;
+}
+
+/* Password rows: the box takes the room, OK sits beside it on the same line. */
+.vault-locker-prompt .vl-input-row .setting-item-info {
+	display: none;
+}
+.vault-locker-prompt .vl-input-row .setting-item-control {
+	flex: 1 1 auto;
+	gap: 8px;
+}
+.vault-locker-prompt .vl-input-row input {
+	flex: 1 1 auto;
+	min-width: 0;
+}

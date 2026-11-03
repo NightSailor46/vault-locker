@@ -1,0 +1,12 @@
+node_modules/
+main.js
+test-vault/.obsidian/plugins/
+.DS_Store
+test-vault/.bench-tmp/
+
+# Hand-test media dragged into the test vault; never commit
+test-vault/**/*.m4v
+test-vault/**/*.mp4
+test-vault/**/*.mov
+test-vault/**/*.mkv
+test-vault/**/*.mp3

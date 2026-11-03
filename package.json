@@ -1,0 +1,12 @@
+{
+  "name": "vault-locker",
+  "version": "0.9.0",
+  "private": true,
+  "description": "Encrypt Obsidian folders, notes and attachments on disk with a password.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "build": "node scripts/build.mjs"
+  },
+  "license": "GPL-3.0-or-later"
+}
