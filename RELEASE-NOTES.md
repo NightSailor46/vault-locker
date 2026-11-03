@@ -1,12 +1,17 @@
 # Vault Locker release notes
 
+## 1.0.1
+- Password prompt redesigned: the password boxes are the same width, stacked on the left; one tall OK button runs down the right side, clear of a phone keyboard.
+- An eye button beside each box shows or hides what you typed (both boxes at once), so you can catch a typo.
+- When setting a new password, the prompt says plainly to type it twice.
+
 ## 1.0.0 (first release)
 Password-protect folders in your Obsidian vault. Notes and attachments are encrypted on disk with AES-256 and can't be read without the password or the recovery key.
 
 **Before you start: pick the folder first.** Every action works on a folder.
 - Right-click the folder in the file list and choose **Vault Locker: protect this folder**, **lock**, **unlock** or **change password**.
 - Or use the lock icon in the left ribbon or a Vault Locker command, then click the folder in the list.
-- **On a phone or tablet,** there is no right-click: **press and hold the folder name** until the menu with lock, unlock and change password appears. On iPhone this can take several seconds, so keep holding. The quicker way is the lock icon in Obsidian's left side menu: one tap opens the folder list.
+- **On a phone or tablet,** there is no right-click: **press and hold the folder name** until the menu with lock, unlock and change password appears. On iPhone this can take several seconds, so keep holding and keep your finger still; if it slides, iOS treats it as a drag or rename and you start over. The quicker way is the lock icon in Obsidian's left side menu: one tap opens the folder list.
 
 **What's in it**
 - Protect a folder: every file inside, including PDFs, images, music and video, is encrypted on disk when locked.

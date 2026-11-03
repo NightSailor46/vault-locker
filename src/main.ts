@@ -613,15 +613,27 @@ class PasswordModal extends Modal {
 
 	onOpen() {
 		this.titleEl.setText(this.title);
+		this.modalEl?.addClass?.("vault-locker-prompt");
+		// Layout: the boxes stacked on the left, equal width, each with an eye that shows
+		// or hides every box at once; one tall OK down the right side, clear of the keyboard.
+		const box: any = this.contentEl.createEl("div", { cls: "vl-pw" });
+		const column: any = box.createEl("div", { cls: "vl-pw-fields" });
 		const inputs: HTMLInputElement[] = [];
-		let ok: any = null;
-		// One row per box: the box fills the row, and the last row has OK beside it, so
-		// there is room to type and a phone keyboard can't cover the button.
-		const field = (name: string, set: (v: string) => void, last: boolean) => {
-			const row = new Setting(this.contentEl).addText((t: any) => {
+		const eyes: any[] = [];
+		let shown = false;
+		const showAll = (on: boolean) => {
+			shown = on;
+			for (const i of inputs) i.type = on ? "text" : "password";
+			for (const e of eyes) {
+				e.setText?.(on ? "🙈" : "👁");
+				e.setAttribute?.("aria-label", on ? "Hide password" : "Show password");
+			}
+		};
+		const field = (name: string, set: (v: string) => void) => {
+			const s: any = new Setting(this.contentEl).addText((t: any) => {
 				t.inputEl.type = this.visible ? "text" : "password";
 				t.setPlaceholder?.(name);
-				t.inputEl.style && (t.inputEl.style.width = "100%");
+				t.inputEl.setAttribute?.("aria-label", name);
 				if (this.visible) {
 					t.inputEl.setAttribute?.("autocapitalize", "characters");
 					t.inputEl.setAttribute?.("autocorrect", "off");
@@ -637,19 +649,35 @@ class PasswordModal extends Modal {
 					if (inputs[i]) inputs[i].focus();
 					else this.submit();
 				});
+				const row: any = column.createEl("div", { cls: "vl-pw-row" });
+				row.appendChild?.(t.inputEl);
+				if (!this.visible) {
+					const eye: any = row.createEl("button", { cls: "vl-pw-eye", text: "👁" });
+					eye.setAttribute?.("type", "button");
+					eye.setAttribute?.("aria-label", "Show password");
+					eye.addEventListener("click", (e: Event) => {
+						e.preventDefault();
+						showAll(!shown);
+						t.inputEl.focus?.();
+					});
+					eyes.push(eye);
+				}
 			});
-			row.settingEl?.addClass?.("vl-input-row");
-			if (last) {
-				row.addButton((b: any) => {
-					ok = b.buttonEl;
-					b.setButtonText("OK").setCta().onClick(() => this.submit());
-				});
-			}
+			s.settingEl?.remove?.();
 		};
-		this.modalEl?.addClass?.("vault-locker-prompt");
-		field(this.visible ? "Recovery key" : this.isNew ? "New password" : "Password", (v) => (this.value = v), !this.isNew);
-		if (this.isNew) field("Confirm password", (v) => (this.confirm = v), true);
-		if (this.isNew) this.contentEl.createEl("p", { text: "There is no way to read a locked folder without this password or the recovery key." });
+		field(this.visible ? "Recovery key" : this.isNew ? "New password" : "Password", (v) => (this.value = v));
+		if (this.isNew) field("Confirm password", (v) => (this.confirm = v));
+		let ok: any = null;
+		const okRow: any = new Setting(this.contentEl).addButton((b: any) => {
+			ok = b.buttonEl;
+			b.setButtonText("OK").setCta().onClick(() => this.submit());
+		});
+		if (ok) {
+			ok.addClass?.("vl-pw-ok");
+			box.appendChild?.(ok);
+		}
+		okRow.settingEl?.remove?.();
+		if (this.isNew) this.contentEl.createEl("p", { text: "Type it twice. There is no way to read a locked folder without this password or the recovery key." });
 		// When the keyboard opens, scroll so OK stays in view.
 		for (const i of inputs) i.addEventListener?.("focus", () => window.setTimeout(() => ok?.scrollIntoView?.({ block: "nearest" }), 300));
 		// Cursor in the first box, so the password can be typed right away. Obsidian moves

@@ -38,15 +38,37 @@
 	overflow-y: auto;
 }
 
-/* Password rows: the box takes the room, OK sits beside it on the same line. */
-.vault-locker-prompt .vl-input-row .setting-item-info {
-	display: none;
-}
-.vault-locker-prompt .vl-input-row .setting-item-control {
-	flex: 1 1 auto;
+/* Password prompt: boxes stacked on the left at equal width, each with an eye; one tall OK on the right. */
+.vault-locker-prompt .vl-pw {
+	display: flex;
 	gap: 8px;
+	align-items: stretch;
+	margin-bottom: 8px;
 }
-.vault-locker-prompt .vl-input-row input {
+.vault-locker-prompt .vl-pw-fields {
 	flex: 1 1 auto;
 	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+.vault-locker-prompt .vl-pw-row {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
+.vault-locker-prompt .vl-pw-row input {
+	flex: 1 1 auto;
+	min-width: 0;
+	width: 100%;
+}
+.vault-locker-prompt .vl-pw-eye {
+	flex: 0 0 auto;
+	padding: 0 8px;
+}
+.vault-locker-prompt .vl-pw-ok {
+	flex: 0 0 auto;
+	align-self: stretch;
+	height: auto;
+	padding: 0 14px;
 }
