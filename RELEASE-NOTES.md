@@ -1,5 +1,10 @@
 # Vault Locker release notes
 
+## 1.1.0
+- Vault Locker Pro is on sale: $5, one time, for life. Click "Buy Pro" in Vault Locker's settings; checkout and sales tax are handled by Polar (polar.sh), and your license key arrives by email.
+- Paste the key into Vault Locker's settings and press Activate. One key works on up to 5 devices.
+- Pro now checks keys with Polar instead of Lemon Squeezy. If Polar can't be reached, Pro keeps working for 30 days from the last good check.
+
 ## 1.0.1
 - Password prompt redesigned: the password boxes are the same width, stacked on the left; one tall OK button runs down the right side, clear of a phone keyboard.
 - An eye button beside each box shows or hides what you typed (both boxes at once), so you can catch a typo.

@@ -3,13 +3,13 @@
 Encrypt folders in your Obsidian vault, notes and attachments alike, with a password. When a folder is locked, its files on disk are unreadable without the password or the recovery key.
 
 ## Disclosures (required by Obsidian's developer policies)
-- **Payment (optional):** Free protects one folder, with full-strength encryption. Pro ($5, lifetime use) adds unlimited folders, the whole vault, auto-lock, lock on quit, hidden file names and a password per folder. Encryption strength is the same in both. Pro is sold by Senior Enterprises LLC through Lemon Squeezy, which handles checkout and emails the license key.
+- **Payment (optional):** Free protects one folder, with full-strength encryption. Pro ($5, lifetime use) adds unlimited folders, the whole vault, auto-lock, lock on quit, hidden file names and a password per folder. Encryption strength is the same in both. Pro is sold by Senior Enterprises LLC through Polar (polar.sh), which handles checkout and sales tax and emails the license key.
 - **In-plugin promotion:** Free shows a short "Get Pro" line in Vault Locker's own settings tab and a notice when you try to protect a second folder. Nothing is shown anywhere else in Obsidian. No ads are loaded from the internet.
 - **Network use:** only for Pro license keys. Free never touches the network.
-  - When you paste a key and press Activate, the plugin sends the key and a device label ("Obsidian") to Lemon Squeezy at `https://api.lemonsqueezy.com/v1/licenses/activate`. Lemon Squeezy returns an activation ID.
-  - When Obsidian starts and the last check is more than a day old, it sends the key and that activation ID to `https://api.lemonsqueezy.com/v1/licenses/validate` to check the key is still active.
-  - If those checks can't reach Lemon Squeezy, Pro keeps working for 30 days from the last good check.
-  - Lemon Squeezy sees your IP address like any web request. Its privacy policy applies to those requests.
+  - When you paste a key and press Activate, the plugin sends the key, Senior Enterprises' Polar organization ID and a device label ("Obsidian") to Polar at `https://api.polar.sh/v1/customer-portal/license-keys/activate`. Polar returns an activation ID.
+  - When Obsidian starts and the last check is more than a day old, it sends the key, that activation ID and the organization and product benefit IDs to `https://api.polar.sh/v1/customer-portal/license-keys/validate` to check the key is still active.
+  - If those checks can't reach Polar, Pro keeps working for 30 days from the last good check.
+  - Polar sees your IP address like any web request. Its privacy policy applies to those requests.
 - **What never leaves your device:** your notes, attachments, file names, folder names, passwords, recovery keys and encryption keys. All encryption happens on your device.
 - **No telemetry:** no usage stats, crash reports or tracking of any kind.
 - **Account:** none for Free. Pro needs a purchase (you get the key by email). No Vault Locker account exists.

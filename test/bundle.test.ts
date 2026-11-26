@@ -194,7 +194,7 @@ function fakeApp(fs: MemFS) {
 before(() => {
 	// Browser globals the plugin touches (idle timer, key listeners).
 	(globalThis as any).document = {};
-	(globalThis as any).window = { setTimeout, clearTimeout };
+	(globalThis as any).window = { setTimeout, clearTimeout, open: () => null };
 	execFileSync(process.execPath, ["scripts/build.mjs"], { cwd: new URL("..", import.meta.url) });
 });
 

@@ -16,7 +16,7 @@ import {
 	needsRevalidation,
 	revalidate,
 	type LicenseState,
-	type PostForm,
+	type PostJson,
 } from "./license.ts";
 
 interface Settings {
@@ -48,13 +48,13 @@ function adapterFS(adapter: any): LockerFS {
 	};
 }
 
-const postForm: PostForm = async (url, form) => {
+const postJson: PostJson = async (url, body) => {
 	const res = await requestUrl({
 		url,
 		method: "POST",
 		headers: { Accept: "application/json" },
-		contentType: "application/x-www-form-urlencoded",
-		body: new URLSearchParams(form).toString(),
+		contentType: "application/json",
+		body: JSON.stringify(body),
 		throw: false,
 	});
 	return { status: res.status, json: res.json };
@@ -231,7 +231,7 @@ export default class VaultLockerPlugin extends Plugin {
 			say(`Vault Locker: ${names} ${open.length === 1 ? "is" : "are"} unlocked, so ${open.length === 1 ? "its" : "their"} files can be read. Right-click and choose "Vault Locker: lock", or run "Lock all protected folders".`, true);
 		}
 		if (needsRevalidation(this.settings.license)) {
-			this.settings.license = await revalidate(postForm, this.settings.license);
+			this.settings.license = await revalidate(postJson, this.settings.license);
 			await this.save();
 		}
 	}
@@ -886,11 +886,11 @@ class VaultLockerSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName("License key")
-			.setDesc(p.pro ? "Pro is active." : "Paste your Pro license key. Checking a key contacts Lemon Squeezy (api.lemonsqueezy.com).")
+			.setDesc(p.pro ? "Pro is active." : "Paste your Pro license key. Checking a key contacts Polar (api.polar.sh).")
 			.addText((t: any) => t.setValue(p.settings.license.key).onChange((v: string) => (p.settings.license = { ...p.settings.license, key: v })))
 			.addButton((b: any) =>
 				b.setButtonText("Activate").onClick(async () => {
-					const { state, error } = await activate(postForm, p.settings.license.key, "Obsidian");
+					const { state, error } = await activate(postJson, p.settings.license.key, "Obsidian");
 					p.settings.license = state;
 					await p.save();
 					say(error ?? "Vault Locker Pro activated.");
